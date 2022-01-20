@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Button, Htag, Label, Ptag, Rating } from '../components'
+import { Button, Card, Htag, Input, Label, Ptag, Rating, Textarea } from '../components'
 import { withLayout } from '../layout/Layout'
 import { IMenuItem } from '../interfaces/menu.interface'
 
@@ -26,7 +26,15 @@ function Home({ menu }: IHomeProps) {
       <Label href='#' color='grey'>grey</Label>
       <Label color='green'>green</Label>
       <Label color='primary'>primary</Label>
+
       <Rating rating={rating} isEditable={true} setRating={setrating} />
+
+      <Card>White</Card>
+      <Card color='blue'>Blue</Card>
+
+      <Input placeholder='Имя' />
+
+      <div><Textarea placeholder='Текст отзыва' /></div>
     </>
   )
 }

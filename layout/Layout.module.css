@@ -27,7 +27,7 @@
   grid-area: footer;
 }
 
-@media (max-width: 765px) {
+@media (max-width: 756px) {
   .wrapper {
     grid-template-columns: minmax(320px, 1fr);
     grid-template-areas: 
@@ -37,10 +37,15 @@
   }
 
   .sidebar {
-    display: none;
+    display: none !important;
   }
 
   .header {
     display: block;
+  }
+
+  .body {
+    grid-area: body;
+    padding: 0 20px;
   }
 }
