@@ -1,10 +1,11 @@
 import { IRatingProps } from './Rating.props'
 import styles from './Rating.module.css'
 import StarIcon from './Star.svg'
-import { useEffect, useState, KeyboardEvent } from 'react'
+import { useEffect, useState, KeyboardEvent, forwardRef, ForwardedRef } from 'react'
 import cn from 'classnames'
 
-export const Rating = ({ rating, setRating, isEditable = false, ...props }: IRatingProps) => {
+// eslint-disable-next-line react/display-name
+export const Rating = forwardRef(({ error, rating, setRating, isEditable = false, ...props }: IRatingProps, ref: ForwardedRef<HTMLDivElement>) => {
   const [ratingArray, setRatingArray] = useState(new Array(5).fill(<></>))
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const Rating = ({ rating, setRating, isEditable = false, ...props }: IRat
           key={i}
           className={cn(styles.star, {
             [styles.filled]: i < currentRating,
-            [styles.editable]: isEditable
+            [styles.editable]: isEditable,
           })}
           onMouseEnter={() => changeDisplay(i + 1)}
           onMouseLeave={() => changeDisplay(rating)}
@@ -62,13 +63,16 @@ export const Rating = ({ rating, setRating, isEditable = false, ...props }: IRat
   }
 
   return (
-    <div {...props}>
+    <div {...props} ref={ref} className={cn(styles.ratingWrapper, {
+      [styles.error]: error
+    })}>
       {ratingArray.map((r, i) => {
         return (
           <span key={i}>{r}</span>
         )
       })}
+      {error && <span className={styles.errorMessage}>{error.message}</span>}
     </div>
   )
-}
+})
 
